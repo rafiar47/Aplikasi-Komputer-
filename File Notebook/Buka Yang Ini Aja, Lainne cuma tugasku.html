@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Password Button</title>
+    <style>
+        /* CSS tetap sama */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 18px;
+            background-color: #72adf1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #message {
+            display: none;
+            font-size: 20px;
+            color: #e45f5f;
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #d35400;
+            border-radius: 5px;
+        }
+
+        @media (min-width: 600px) {
+            .button-container {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Kata-kata Susulan, anggap aja ini nempel di susu yang semalem ku kasih.</div>
+    
+    <div class="button-container">
+        <button data-number="1">Aulia</button>
+        <button data-number="2">Mare</button>
+        <button data-number="3">Azizah</button>
+        <button data-number="4">Fayyaz</button>
+        <button data-number="5">Elza</button>
+        <button data-number="6">Zafra</button>
+    </div>
+
+    <div id="message"></div>
+
+    <script>
+        // Konfigurasi password dan pesan
+        const config = {
+            1: {
+                password: "4 Februari 2007",
+                message: "Aul, semangat ya buat satu periode kedepan ini. Mungkin dari aku kedepannya bakal ada salah dan khilaf tapi jangan segan buat negur aku ya. Intinya semangat lah buat satu periode ini sama yang lainnya juga. ~Rafi"
+            },
+            2: {
+                password: "06 Maret 2006",
+                message: "Maree, jangan sungkan buat ngungkapin kalau misal kamu ada ide, sampaikan dulu aja lah. Semangat nuga buat satu periode kedapan, dan mulai dari sekarang kerja kita baru aja dimulai, jadi semangat yaa. Kalau misal ada apa-apa jangan malu buat sampein ke aku atau ke elza juha ngga papa, yang penting jangan terlalu mendem semua sendiri. ~Rafi"
+            },
+            3: {
+                password: "07 Agustus 2004",
+                message: "Azizahh, selanjutnya mungkin kamu akan ada kesibukan yang lainn, tapi ngga papa yang penting dari sospol kamu ikut diskusi dan ngelakuin tugas mu lah. Ini baru awla perjalanan kita selama satu periode, jadi kalau musal kamu ada masalah-masalah baik internal sospol atau eksternal jangan malu buat cerita aja sama yang lainnya, paling ngga ke elza yaa. ~Rafi"
+            },
+            4: {
+                password: "17 Agustus 2005",
+                message: "Yaz, mungkin koe fokus wae FESPA, maksimalke komunikasi kr zafrra, ojo sampe ono miskom antara koe kr zafra, kalian kerja bareng-bareng. Terus nek ono opo-opo ojo sampe lali ngabarin aku, misal aku gak iso ngekei solusi aku bakal minta solusi liane juga, intine semangat laahh satu periode iki. ~Rafi"
+            },
+            5: {
+                password: "17 Agustus 2003",
+                message: "Elzaa, mungkin akan ada banyak paragraf kl aku ceritain semua. Tapi beberapa hal yang penting adalah aku makasih banget kamu mau nerima jadi wakilku, kedepannya bakalan ada banyak hal yang terjadi antara senang dan sedihh, dan setelah raker ini baru awal perjalanan kita semua. Dan kemungkinan aku mulai Juli-September ada PK terus Oktober-Desember aku ada KKN, aku akan berusaha dateng pas rabid atau hal-hal yang harus didiskusikan, tapi selama aku ngga dikampus aku minta tolong kamu yang kontrol dan aku menghargai setiap keputusan yang akan kamu buat selama tidak melenceng dari visi&misi dan GBHK yaa. Intinya, semahgat aja lah buat satu periode kedepan, jadi kalau misal ada apa-apa jangan sungkan hubungin akuu. Oiya hampir lupa, salah satu tugas yang mungkin aku percayakan sama kamu juga menjaga internal, jadi mungkin ada kalanya temen-temen yang lain akan cerita-cerita ke kamuu.  ~Rafi"
+            },
+            6: {
+                password: "30 Desember 2005",
+                message: "Zafraa, ini baru awal pekerjaan kita selanjutnya baik di sospol, nantinya kamu akan ngehadepin banyak hal antara sedih ataupun seneng, apalagi kamu pegang satu proker paling besar di BEM 25 juga, tapi jangan sampe kamu pesimis karena pasti ada aku sama yang lain pasti bantu kamuu, dan jangan lupa kalau ada apa-apa bisa hubungin aku ataupun elza yaa. Intinya jangan underestimate dirimu sendiri lah. ~Rafi"
+            }
+        };
+
+        // Element pesan
+        const messageElement = document.getElementById('message');
+
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                const buttonNumber = this.getAttribute('data-number');
+                const password = prompt(`Masukkan password untuk tombol ${buttonNumber}:`);
+                
+                // Reset pesan
+                messageElement.style.display = 'none';
+                
+                if(password === config[buttonNumber].password) {
+                    messageElement.textContent = config[buttonNumber].message;
+                    messageElement.style.display = 'block';
+                } else {
+                    alert("Password salah! Coba lagi.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
